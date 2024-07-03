@@ -47,7 +47,7 @@ fig2 = px.choropleth_mapbox(gdf_linden,
                             hover_name="DISTRICTNO",
                             custom_data=["DISTRICTNO"], 
                             color=gdf_linden['color'],
-                            color_discrete_map={'#514585':'#800000', '#800000':'#800000'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#800000'},
                             center={"lat": gdf_linden.centroid.y.mean(), "lon": gdf_linden.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -62,7 +62,7 @@ fig1 = px.choropleth_mapbox(gdf_crane,
                             hover_name="DISTRICTNO",
                             custom_data=["DISTRICTNO"], 
                             color=gdf_crane['color'],
-                            color_discrete_map={'#514585':'#800000', '#800000':'#800000'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#800000'},
                             center={"lat": gdf_crane.centroid.y.mean(), "lon": gdf_crane.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -178,7 +178,7 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#66938e",
+    ),    paper_bgcolor="#c09ddc",
 )
 
 
@@ -196,7 +196,7 @@ fig2 = px.choropleth_mapbox(gdf1_linden,
                             hover_name="DISTRICTNO",
                             hover_data=["Precinct_L", "DISTRICTNO", "PRECINCTID"],
                             color=gdf1_linden['color'],
-                            color_discrete_map={'#514585':'#800000', '#800000':'#800000'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#800000'},
                             center={"lat": gdf1_linden.centroid.y.mean(), "lon": gdf1_linden.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -211,7 +211,7 @@ fig1 = px.choropleth_mapbox(gdf1_crane,
                             hover_name="DISTRICTNO", 
                             hover_data=["Precinct_L", "DISTRICTNO", "PRECINCTID"],
                             color=gdf1_crane['color'],
-                            color_discrete_map={'#514585':'#800000', '#800000':'#004b44'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#7B3EB8'},
                             center={"lat": gdf1_crane.centroid.y.mean(), "lon": gdf1_crane.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -327,7 +327,7 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#66938e",
+    ),    paper_bgcolor="#c09ddc",
 )
 
 fig.update_layout(showlegend=False)
