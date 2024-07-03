@@ -186,7 +186,7 @@ fig.update_layout(showlegend=False)
 st.plotly_chart(fig, use_container_width=True, height=1200)
 
 container = st.container(border=True)
-container.write("This is inside the container")
+container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive and contain zoom and selection features.")
 
 st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
 
@@ -337,4 +337,4 @@ fig.update_layout(showlegend=False)
 st.plotly_chart(fig, use_container_width=True, height=1200)
 
 container = st.container(border=True)
-container.write("This is inside the container")
+container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive and contain zoom and selection features. The 2022 voting precincts are mapped as well, and the precincts that changed Senate Districts are highlighted in purple on the Crane map.")
