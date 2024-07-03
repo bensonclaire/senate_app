@@ -19,7 +19,7 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.title(':gray[Michigan State Senate Districts]')
+st.title(':orange[Michigan State Senate Districts]')
 st.subheader(':orange[Change in Precinct Distribution between the Linden and Crane Maps]')
 
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
