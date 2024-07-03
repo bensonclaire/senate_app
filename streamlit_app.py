@@ -19,9 +19,9 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.markdown("<h1 style='text-align: center; color: orange;'>Michigan State Senate Districts</h1><br><br><br>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: orange;'>Michigan State Senate Districts</h1><br><br>", unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: orange;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: violet;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
 gdf_linden = gpd.read_file(shapefile_path)
@@ -92,7 +92,7 @@ layout = go.Layout(
             lon=gdf_crane.centroid.x.mean()   # Center on first choropleth map's centroid
         ),
         pitch=0,
-        zoom=5, 
+        zoom=7, 
         style='outdoors'
     ),
     mapbox2=dict(
@@ -104,7 +104,7 @@ layout = go.Layout(
             lon=gdf_linden.centroid.x.mean()   # Center on second choropleth map's centroid
         ),
         pitch=0,
-        zoom=5, 
+        zoom=7, 
         style='outdoors'
     )
 )
@@ -188,7 +188,7 @@ st.plotly_chart(fig, use_container_width=True, height=1200)
 container = st.container(border=True)
 container.write("This is inside the container")
 
-st.markdown("<h1 style='text-align: center; color: grey;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: blue;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
 
 fig2 = px.choropleth_mapbox(gdf1_linden, 
                             geojson=gdf1_linden.geometry.__geo_interface__,
