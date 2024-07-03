@@ -19,10 +19,10 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.title(':orange[Michigan State Senate Districts]')
-st.subheader(':orange[Change in Precinct Distribution between the Linden and Crane Maps]')
+st.title(':violet[Michigan State Senate Districts]')
+st.subheader(':violet[Change in Precinct Distribution between the Linden and Crane Maps]')
 
-st.markdown("<h1 style='text-align: center; color: orange;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: grey;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
 gdf_linden = gpd.read_file(shapefile_path)
@@ -47,7 +47,7 @@ fig2 = px.choropleth_mapbox(gdf_linden,
                             hover_name="DISTRICTNO",
                             custom_data=["DISTRICTNO"], 
                             color=gdf_linden['color'],
-                            color_discrete_map={'#514585':'#8390FA', '#800000':'#800000'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#8390FA'},
                             center={"lat": gdf_linden.centroid.y.mean(), "lon": gdf_linden.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -62,7 +62,7 @@ fig1 = px.choropleth_mapbox(gdf_crane,
                             hover_name="DISTRICTNO",
                             custom_data=["DISTRICTNO"], 
                             color=gdf_crane['color'],
-                            color_discrete_map={'#514585':'#8390FA', '#800000':'#800000'},
+                            color_discrete_map={'#514585':'#8390FA', '#800000':'#8390FA'},
                             center={"lat": gdf_crane.centroid.y.mean(), "lon": gdf_crane.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -186,7 +186,7 @@ fig.update_layout(showlegend=False)
 
 st.plotly_chart(fig, use_container_width=True, height=1200)
 
-st.markdown("<h1 style='text-align: center; color: orange;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: grey;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
 
 fig2 = px.choropleth_mapbox(gdf1_linden, 
                             geojson=gdf1_linden.geometry.__geo_interface__,
