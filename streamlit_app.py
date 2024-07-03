@@ -19,7 +19,7 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br><br>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
 
 st.markdown("<h1 style='text-align: center; color:#D09DDC;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
