@@ -11,7 +11,7 @@ import warnings
 warnings.filterwarnings("ignore")
 
 st.set_page_config(
-    page_title="Michigan House Districts and Voting Precincts Maps",
+    page_title="Michigan Senate Districts and Voting Precincts Maps",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -19,10 +19,9 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.title(':violet[Michigan State Senate Districts]')
-st.subheader(':violet[Change in Precinct Distribution between the Linden and Crane Maps]')
+st.markdown("<h1 style='text-align: center; color: orange;'>Michigan State Senate Districts</h1><br><br><br>", unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color: grey;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color: orange;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
 gdf_linden = gpd.read_file(shapefile_path)
@@ -171,7 +170,7 @@ fig.update_traces(
 
 fig.update_layout(
     autosize=False,
-    height=900,
+    height=700,
     margin=dict(
         l=50,
         r=50,
@@ -323,14 +322,14 @@ fig.update_traces(
 
 fig.update_layout(
     autosize=False,
-    height=900,
+    height=700,
     margin=dict(
         l=50,
         r=50,
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#604D53",
+    ),    paper_bgcolor="#fbdb8b",
 )
 
 fig.update_layout(showlegend=False)
