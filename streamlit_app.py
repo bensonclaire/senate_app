@@ -92,7 +92,7 @@ layout = go.Layout(
             lon=gdf_crane.centroid.x.mean()   # Center on first choropleth map's centroid
         ),
         pitch=0,
-        zoom=6, 
+        zoom=5, 
         style='outdoors'
     ),
     mapbox2=dict(
@@ -104,7 +104,7 @@ layout = go.Layout(
             lon=gdf_linden.centroid.x.mean()   # Center on second choropleth map's centroid
         ),
         pitch=0,
-        zoom=6, 
+        zoom=5, 
         style='outdoors'
     )
 )
@@ -188,7 +188,7 @@ st.plotly_chart(fig, use_container_width=True, height=1200)
 container = st.container(border=True)
 container.write("This is inside the container")
 
-st.markdown("<h1 style='text-align: center; color:#D09DDC;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
 
 fig2 = px.choropleth_mapbox(gdf1_linden, 
                             geojson=gdf1_linden.geometry.__geo_interface__,
