@@ -347,5 +347,21 @@ if active_tab == "Map":
 
 # Render Data tab
 elif active_tab == "Excel Data":
-    df = pd.read_excel("gdf1_crane2.xlsx")
-    st.dataframe(df, width=1000, height=800)
+    def load_dataframe(file_path):
+        return pd.read_excel(file_path)
+    
+    df_option = st.selectbox(
+        "Select a dataframe",
+        ("Linden District Boundaries", "Crane District Boundaries", "Precincts that Changed Districts")
+    )
+    
+    # Load the selected dataframe
+    if df_option == "Linden District Boundaries":
+        df = load_dataframe("gdf1_linden2.xlsx")
+    elif df_option == "Crane District Boundaries":
+        df = load_dataframe("gdf1_crane2.xlsx")
+    else:
+        df = load_dataframe("Crane_Linden_District_Changes.xlsx")
+    
+    # Display the selected dataframe
+    st.dataframe(df, width=1000, height=500)
