@@ -19,10 +19,6 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
-
-st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
-
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
 gdf_linden = gpd.read_file(shapefile_path)
 
@@ -183,12 +179,7 @@ fig.update_layout(
 
 fig.update_layout(showlegend=False)
 
-st.plotly_chart(fig, use_container_width=True, height=1200)
-
-container = st.container(border=True)
-container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive and contain zoom and selection features.")
-
-st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+fig3=fig
 
 fig2 = px.choropleth_mapbox(gdf1_linden, 
                             geojson=gdf1_linden.geometry.__geo_interface__,
@@ -334,7 +325,27 @@ fig.update_layout(
 
 fig.update_layout(showlegend=False)
 
-st.plotly_chart(fig, use_container_width=True, height=1200)
+# Define tabs
+tabs = ["Map", "Excel Data"]
+active_tab = st.sidebar.radio("Select Tab", tabs)
 
-container = st.container(border=True)
-container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive and contain zoom and selection features. The 2022 voting precincts are mapped as well, and the precincts that changed Senate Districts are highlighted in purple on the Crane map.")
+# Render Plot tab
+if active_tab == "Map":
+    st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
+
+    st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+
+    st.plotly_chart(fig3, use_container_width=True, height=1200)
+    container = st.container(border=True)
+    container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features.")
+    st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+    
+    st.plotly_chart(fig, use_container_width=True, height=1200)
+    container = st.container(border=True)
+    container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features. The 2022 voting precincts are mapped as well, and the precincts that changed Senate Districts are highlighted in purple on the Crane map.")
+
+
+# Render Data tab
+elif active_tab == "Excel Data":
+    df = pd.read_excel("gdf1v2.xlsx")
+    st.dataframe(df, width=1000, height=800)
