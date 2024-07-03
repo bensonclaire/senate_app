@@ -21,7 +21,7 @@ st.set_option('deprecation.showPyplotGlobalUse', False)
 
 st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
 
-st.markdown("<h1 style='text-align: center; color:#D09DDC;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
 shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
 gdf_linden = gpd.read_file(shapefile_path)
