@@ -331,14 +331,14 @@ active_tab = st.sidebar.radio("Select Tab", tabs)
 
 # Render Plot tab
 if active_tab == "Map":
-    st.markdown("<h1 style='text-align: center; color:#8390FA;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#a9dc9e;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
 
-    st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#dcb19e; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
     st.plotly_chart(fig3, use_container_width=True, height=1200)
     container = st.container(border=True)
     container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features.")
-    st.markdown("<h1 style='text-align: center; color:#D09DDC; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#dcb19e; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
     
     st.plotly_chart(fig, use_container_width=True, height=1200)
     container = st.container(border=True)
