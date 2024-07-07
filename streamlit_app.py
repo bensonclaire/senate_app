@@ -331,7 +331,7 @@ active_tab = st.sidebar.radio("Select Tab", tabs)
 
 # Render Plot tab
 if active_tab == "Map":
-    st.markdown("<h1 style='text-align: center; color:#a9dc9e;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#DCB19E;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
 
     st.markdown("<h1 style='text-align: center; color:##2B061E; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
