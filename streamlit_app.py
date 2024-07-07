@@ -173,7 +173,7 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#fbdb8b",
+    ),    paper_bgcolor="#a9dc9e",
 )
 
 
@@ -320,7 +320,7 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#fbdb8b",
+    ),    paper_bgcolor="#a9dc9e",
 )
 
 fig.update_layout(showlegend=False)
