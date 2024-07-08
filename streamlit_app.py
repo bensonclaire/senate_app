@@ -19,21 +19,22 @@ st.set_page_config(
 # Filter out warnings (optional)
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-shapefile_path = "6bc519b009f35b3311fc5009945479fb.shp"
-gdf_linden = gpd.read_file(shapefile_path)
+# Cache the data loading functions
+@st.cache_data
+def load_shapefile(shapefile_path):
+    return gpd.read_file(shapefile_path)
 
-shapefile_path = "c074a222edfd3dc6822d0a8e844b8d3f.shp"
-gdf_crane = gpd.read_file(shapefile_path)
+# Load shapefiles with caching
+gdf_linden = load_shapefile("6bc519b009f35b3311fc5009945479fb.shp")
+gdf_crane = load_shapefile("c074a222edfd3dc6822d0a8e844b8d3f.shp")
+gdf1_crane = load_shapefile("gdf1_crane.shp")
+gdf1_linden = load_shapefile("gdf1_linden.shp")
 
-shapefile_path = "gdf1_crane.shp"
-gdf1_crane=gpd.read_file(shapefile_path)
+# Set colors
+gdf_linden['color'] = '#514585'
+gdf_crane['color'] = '#800000'
 
-shapefile_path = "gdf1_linden.shp"
-gdf1_linden=gpd.read_file(shapefile_path)
-
-gdf_linden['color']='#514585'
-gdf_crane['color']='#800000'
-
+# First map (gdf_linden)
 fig2 = px.choropleth_mapbox(gdf_linden, 
                             geojson=gdf_linden.geometry.__geo_interface__,
                             locations=gdf_linden.index,
@@ -47,8 +48,7 @@ fig2 = px.choropleth_mapbox(gdf_linden,
                             opacity=0.5,
                            )
 
-# Extracting data from fig1
-# Your second choropleth map code
+# Second map (gdf_crane)
 fig1 = px.choropleth_mapbox(gdf_crane, 
                             geojson=gdf_crane.geometry.__geo_interface__,
                             locations=gdf_crane.index,
@@ -62,19 +62,17 @@ fig1 = px.choropleth_mapbox(gdf_crane,
                             opacity=0.5,
                            )
 
-# Extracting data from fig2
-choropleth_data1 = list(fig1.data)  # Convert tuple to list
-choropleth_data2 = list(fig2.data)  # Convert tuple to list
+# Extract data from figures
+choropleth_data1 = list(fig1.data)
+choropleth_data2 = list(fig2.data)
 
 # Define your Mapbox access token
 mapbox_access_token = 'pk.eyJ1IjoiY2JlbnNvMTgyMiIsImEiOiJjbHdoenNleTcwMXljMmpwa25xb29mM2FvIn0.oUFcXxBLN4G4FIM2TG8mtg'
 
 # Scattermapbox data
 scattermapbox_data = [
-    go.Scattermapbox(
-    ),
-    go.Scattermapbox(
-    )
+    go.Scattermapbox(),
+    go.Scattermapbox()
 ]
 
 # Layout
@@ -84,11 +82,11 @@ layout = go.Layout(
         domain={'x': [0, 0.4], 'y': [0, 1]},
         bearing=0,
         center=dict(
-            lat=gdf_crane.centroid.y.mean(),  # Center on first choropleth map's centroid
-            lon=gdf_crane.centroid.x.mean()   # Center on first choropleth map's centroid
+            lat=gdf_crane.centroid.y.mean(),
+            lon=gdf_crane.centroid.x.mean()
         ),
         pitch=0,
-        zoom=5, 
+        zoom=5,
         style='outdoors'
     ),
     mapbox2=dict(
@@ -96,17 +94,17 @@ layout = go.Layout(
         domain={'x': [0.6, 1.0], 'y': [0, 1]},
         bearing=0,
         center=dict(
-            lat=gdf_linden.centroid.y.mean(),  # Center on second choropleth map's centroid
-            lon=gdf_linden.centroid.x.mean()   # Center on second choropleth map's centroid
+            lat=gdf_linden.centroid.y.mean(),
+            lon=gdf_linden.centroid.x.mean()
         ),
         pitch=0,
-        zoom=5, 
+        zoom=5,
         style='outdoors'
     )
 )
 
 # Create the figure
-fig = go.Figure(data=scattermapbox_data + choropleth_data2 , layout=layout)
+fig = go.Figure(data=scattermapbox_data + choropleth_data2, layout=layout)
 
 for trace in choropleth_data1:
     trace['subplot'] = 'mapbox2'
@@ -140,7 +138,7 @@ fig.update_layout(
                 "type": "line",
                 "color": "black",
                 "line": {
-                    "width": 3.5  
+                    "width": 3.5
                 }
             }
         ]
@@ -152,7 +150,7 @@ fig.update_layout(
                 "type": "line",
                 "color": "black",
                 "line": {
-                    "width": 3.5  
+                    "width": 3.5
                 }
             }
         ]
@@ -163,7 +161,6 @@ fig.update_traces(
     hovertemplate="<b>State Senate District: %{customdata[0]}</b><extra></extra>"
 )
 
-
 fig.update_layout(
     autosize=False,
     height=700,
@@ -173,14 +170,15 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#5C4742",
+    ),
+    paper_bgcolor="#5C4742",
 )
-
 
 fig.update_layout(showlegend=False)
 
-fig3=fig
+fig3 = fig
 
+# Third and fourth maps with gdf1_linden and gdf1_crane
 fig2 = px.choropleth_mapbox(gdf1_linden, 
                             geojson=gdf1_linden.geometry.__geo_interface__,
                             locations=gdf1_linden.index,
@@ -194,14 +192,12 @@ fig2 = px.choropleth_mapbox(gdf1_linden,
                             opacity=0.5,
                            )
 
-# Extracting data from fig1
-# Your second choropleth map code
 fig1 = px.choropleth_mapbox(gdf1_crane, 
                             geojson=gdf1_crane.geometry.__geo_interface__,
                             locations=gdf1_crane.index,
                             mapbox_style="carto-positron",
                             zoom=5,
-                            hover_name="DISTRICTNO", 
+                            hover_name="DISTRICTNO",
                             hover_data=["Precinct_L", "DISTRICTNO", "PRECINCTID"],
                             color=gdf1_crane['color'],
                             color_discrete_map={'#514585':'#8390FA', '#800000':'#7B3EB8'},
@@ -209,33 +205,20 @@ fig1 = px.choropleth_mapbox(gdf1_crane,
                             opacity=0.5,
                            )
 
-# Extracting data from fig2
-choropleth_data1 = list(fig1.data)  # Convert tuple to list
-choropleth_data2 = list(fig2.data)  # Convert tuple to list
+choropleth_data1 = list(fig1.data)
+choropleth_data2 = list(fig2.data)
 
-# Define your Mapbox access token
-mapbox_access_token = 'pk.eyJ1IjoiY2JlbnNvMTgyMiIsImEiOiJjbHdoenNleTcwMXljMmpwa25xb29mM2FvIn0.oUFcXxBLN4G4FIM2TG8mtg'
-
-# Scattermapbox data
-scattermapbox_data = [
-    go.Scattermapbox(
-    ),
-    go.Scattermapbox(
-    )
-]
-
-# Layout
 layout = go.Layout(
     mapbox=dict(
         accesstoken=mapbox_access_token,
         domain={'x': [0, 0.4], 'y': [0, 1]},
         bearing=0,
         center=dict(
-            lat=gdf1_crane.centroid.y.mean(),  # Center on first choropleth map's centroid
-            lon=gdf1_crane.centroid.x.mean()   # Center on first choropleth map's centroid
+            lat=gdf1_crane.centroid.y.mean(),
+            lon=gdf1_crane.centroid.x.mean()
         ),
         pitch=0,
-        zoom=5, 
+        zoom=5,
         style='outdoors'
     ),
     mapbox2=dict(
@@ -243,17 +226,16 @@ layout = go.Layout(
         domain={'x': [0.6, 1.0], 'y': [0, 1]},
         bearing=0,
         center=dict(
-            lat=gdf1_linden.centroid.y.mean(),  # Center on second choropleth map's centroid
-            lon=gdf1_linden.centroid.x.mean()   # Center on second choropleth map's centroid
+            lat=gdf1_linden.centroid.y.mean(),
+            lon=gdf1_linden.centroid.x.mean()
         ),
         pitch=0,
-        zoom=5, 
+        zoom=5,
         style='outdoors'
     )
 )
 
-# Create the figure
-fig = go.Figure(data=scattermapbox_data + choropleth_data2 , layout=layout)
+fig = go.Figure(data=scattermapbox_data + choropleth_data2, layout=layout)
 
 for trace in choropleth_data1:
     trace['subplot'] = 'mapbox2'
@@ -287,7 +269,7 @@ fig.update_layout(
                 "type": "line",
                 "color": "black",
                 "line": {
-                    "width": 3.5  
+                    "width": 3.5
                 }
             }
         ]
@@ -299,7 +281,7 @@ fig.update_layout(
                 "type": "line",
                 "color": "black",
                 "line": {
-                    "width": 3.5  
+                    "width": 3.5
                 }
             }
         ]
@@ -310,7 +292,6 @@ fig.update_traces(
     hovertemplate="<b>Precinct Name: %{customdata[0]}</b><br>State House District: %{customdata[1]}<br>Precinct ID: %{customdata[2]}<extra></extra>"
 )
 
-
 fig.update_layout(
     autosize=False,
     height=700,
@@ -320,7 +301,8 @@ fig.update_layout(
         b=50,
         t=50,
         pad=4
-    ),    paper_bgcolor="#2B061E",
+    ),
+    paper_bgcolor="#2B061E",
 )
 
 fig.update_layout(showlegend=False)
@@ -337,16 +319,16 @@ if active_tab == "Map":
 
     st.plotly_chart(fig3, use_container_width=True, height=1200)
     container = st.container(border=True)
-    container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features.")
+    container.write("The 2022 Linden State Senate District boundaries are pictured on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features.")
     st.markdown("<h1 style='text-align: center; color:##2B061E; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
     
     st.plotly_chart(fig, use_container_width=True, height=1200)
     container = st.container(border=True)
-    container.write("The 2022 Linden State Senate District boundaries are picture on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features. The 2022 voting precincts are mapped as well, and the precincts that changed Senate Districts are highlighted in purple on the Crane map.")
-
+    container.write("The 2022 Linden State Senate District boundaries are pictured on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features. The 2022 voting precincts are mapped as well, and the precincts that changed Senate Districts are highlighted in purple on the Crane map.")
 
 # Render Data tab
 elif active_tab == "Excel Data":
+    @st.cache_data
     def load_dataframe(file_path):
         return pd.read_excel(file_path)
     
