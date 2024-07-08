@@ -57,7 +57,7 @@ fig1 = px.choropleth_mapbox(gdf_crane,
                             hover_name="DISTRICTNO",
                             custom_data=["DISTRICTNO"], 
                             color=gdf_crane['color'],
-                            color_discrete_map={'#514585':'#7B3EB8', '#800000':'#7B3EB8'},
+                            color_discrete_map={'#514585':'#B078CA', '#800000':'#B078CA'},
                             center={"lat": gdf_crane.centroid.y.mean(), "lon": gdf_crane.centroid.x.mean()},
                             opacity=0.5,
                            )
@@ -171,7 +171,7 @@ fig.update_layout(
         t=50,
         pad=4
     ),
-    paper_bgcolor="#5C4742",
+    paper_bgcolor="#F4EBD9",
 )
 
 fig.update_layout(showlegend=False)
@@ -302,7 +302,7 @@ fig.update_layout(
         t=50,
         pad=4
     ),
-    paper_bgcolor="#2B061E",
+    paper_bgcolor="#F4EBD9",
 )
 
 fig.update_layout(showlegend=False)
@@ -313,14 +313,14 @@ active_tab = st.sidebar.radio("Select Tab", tabs)
 
 # Render Plot tab
 if active_tab == "Map":
-    st.markdown("<h1 style='text-align: center; color:#DCB19E;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#373F51;'>Michigan State Senate Districts</h1><br>", unsafe_allow_html=True)
 
-    st.markdown("<h1 style='text-align: center; color:##2B061E; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#B078CA; font-size:36px;'>Linden District Boundaries and Crane District Boundaries</h1>", unsafe_allow_html=True)
 
     st.plotly_chart(fig3, use_container_width=True, height=1200)
     container = st.container(border=True)
     container.write("The 2022 Linden State Senate District boundaries are pictured on the left map. The proposed 2024 Crane State Senate District Boundaries are pictured on the right map. The majority of the boundary changes occurred in the Metro Detroit area. Both maps are interactive, containing zoom and selection features.")
-    st.markdown("<h1 style='text-align: center; color:##2B061E; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center; color:#B078CA; font-size:36px;'>Linden District Boundaries and Crane District Boundaries Against Voting Precincts</h1>", unsafe_allow_html=True)
     
     st.plotly_chart(fig, use_container_width=True, height=1200)
     container = st.container(border=True)
