@@ -3,6 +3,6 @@ pandas==2.2.2
 plotly==5.22.0
 pyproj==3.6.1
 shapely==2.0.4
-streamlit==1.4.0
+streamlit==1.36.0
 matplotlib==3.8.4
 openpyxl==3.1.2
